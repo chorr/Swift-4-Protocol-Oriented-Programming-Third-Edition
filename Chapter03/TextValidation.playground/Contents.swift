@@ -24,16 +24,14 @@ class AlphabeticValidation1: TextValidation1 {
         }
     }
     func validateString(str: String) -> Bool {
-        if let _ = str.range(of: regExMatchingString, options:
-            .regularExpression){
+        if let _ = str.range(of: regExMatchingString, options: .regularExpression) {
             return true
         } else {
             return false
         }
     }
     func getMatchingString(str: String) -> String? {
-        if let newMatch = str.range(of: regExFindMatchString, options:
-            .regularExpression) {
+        if let newMatch = str.range(of: regExFindMatchString, options: .regularExpression) {
             return str.substring(with: newMatch)
         } else {
             return nil

@@ -85,6 +85,7 @@ class MyObserverType: PropertyObserver {
         print("New Value: \(newValue)")
     }
 }
+
 struct PropertyObserverTest {
     var observer: PropertyObserver
     var property1: String {

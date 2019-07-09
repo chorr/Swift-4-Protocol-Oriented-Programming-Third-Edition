@@ -23,9 +23,11 @@ fileprivate class BackendQueue<T> {
             return nil
         }
     }
+
     public func count() -> Int {
         return items.count
     }
+
     public func copy() -> BackendQueue<T> {
         return BackendQueue<T>(items)
     }
@@ -48,7 +50,7 @@ struct Queue {
         internalQueue.addItem(item: item)
     }
     public mutating func getItem() -> Int? {
-        checkUniquelyReferencedInternalQueue();
+        checkUniquelyReferencedInternalQueue()
         return internalQueue.getItem()
     }
     public func count() -> Int {
@@ -69,6 +71,7 @@ fileprivate var queue2 = queue1
 
 isKnownUniquelyReferenced(&queue1)
 
+// 여기서부터 COW 구현 확인 용도
 var queue3 = Queue()
 queue3.addItem(item: 1)
 
@@ -79,7 +82,7 @@ var queue4 = queue3
 print(queue3.uniquelyReferenced())
 print(queue4.uniquelyReferenced())
 
-queue3.addItem(item: 2)
+queue3.addItem(item: 2)  // 마법이 일어나는 순간~!!
 
 print(queue3.uniquelyReferenced())
 print(queue4.uniquelyReferenced())

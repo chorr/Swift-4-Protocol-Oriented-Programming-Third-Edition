@@ -39,3 +39,44 @@ class Dog: Quadruped {
     }
 }
 
+// 추가 설명
+class Foo {
+    func execute() {
+        print("Foo.execute")
+    }
+}
+
+class Bar: Foo {
+    override func execute() {
+        print("Bar.execute")
+    }
+}
+
+class Baz: Foo {
+    override func execute() {
+        print("Baz.execute")
+    }
+}
+
+class DynamicDispatch {
+    var foo: Foo
+    init(foo: Foo) {
+        self.foo = foo
+    }
+    func run() {
+        foo.execute()
+    }
+}
+
+let dynamicDispatch = DynamicDispatch(foo: Bar())
+dynamicDispatch.run()
+
+class StaticDispatch {
+    func run() {
+        Foo().execute()
+    }
+}
+
+let staticDispatch = StaticDispatch()
+staticDispatch.run()
+

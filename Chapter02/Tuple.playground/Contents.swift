@@ -4,8 +4,8 @@ import Cocoa
 
 var str = "Hello, playground"
 
-let mathGrade1 = ("Jon", 100)
-let (name, score) = mathGrade1
+let mathGrade1 = ("Jon", 100, false)
+let (name, score, _) = mathGrade1
 print("\(name) - \(score)")
 
 let mathGrade2 = (name: "Jon", grade: 100)

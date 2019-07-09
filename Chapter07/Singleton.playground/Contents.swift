@@ -7,7 +7,6 @@ class MySingleton {
     static let sharedInstance = MySingleton()
     var number = 0
     private init() {}
-    
 }
 
 var singleA = MySingleton.sharedInstance

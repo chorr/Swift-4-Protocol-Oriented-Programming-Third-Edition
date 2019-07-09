@@ -16,4 +16,3 @@ extension Int {
 
 
 print(10.factorial())
-

@@ -11,3 +11,8 @@ class LinkedListReferenceType {
         self.value = value
     }
 }
+
+//struct LinkedListValueType {
+//    var value: String
+//    var next: LinkedListValueType?
+//}

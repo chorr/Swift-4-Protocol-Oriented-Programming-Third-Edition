@@ -71,7 +71,7 @@ class Amphibious: Vehicle {
         vehicleAttackTypes = [.Land, .Sea]
         vehicleMovementTypes = [.Land, .Sea]
         
-        landAttackRange = 1
+//        landAttackRange = 1
         seaAttackRange = 1
         
         hitPoints = 25

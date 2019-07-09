@@ -29,8 +29,6 @@ struct List<T> {
     }
 }
 
-
-
 var myList = List<Int>()
 myList.add(item: 1)
 myList.add(item: 2)

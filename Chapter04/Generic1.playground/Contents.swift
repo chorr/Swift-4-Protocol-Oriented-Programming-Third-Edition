@@ -24,3 +24,7 @@ print("c:\(c) d:\(d)")
 func testGeneric<T,E>(a:T, b:E) {
     print("\(a) \(b)")
 }
+
+//func genericEqual<T>(a: T, b: T) -> Bool {
+//    return a == b
+//}

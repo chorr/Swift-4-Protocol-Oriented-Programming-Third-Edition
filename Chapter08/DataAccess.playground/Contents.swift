@@ -24,9 +24,21 @@ enum DataAccessError: Error {
 }
 
 /*** Data Model Layer  ***/
-typealias TeamData = ( teamId: Int64?, city: String?, nickName: String?, abbreviation: String?)
+typealias TeamData = (
+    teamId: Int64?,
+    city: String?,
+    nickName: String?,
+    abbreviation: String?
+)
 
-typealias PlayerData = ( playerId: Int64?, firstName: String?, lastName: String?, number: Int?, teamId: Int64?, position: Positions?)
+typealias PlayerData = (
+    playerId: Int64?,
+    firstName: String?,
+    lastName: String?,
+    number: Int?,
+    teamId: Int64?,
+    position: Positions?
+)
 
 
 /*** Data Helper Layer ***/
@@ -49,7 +61,8 @@ struct TeamDataHelper: DataHelper {
         teamData.append(item)
         return item.teamId!
     }
-    static func delete (_ item: T) throws -> Void {
+
+    static func delete(_ item: T) throws -> Void {
         guard let id = item.teamId else {
             throw DataAccessError.nilInData
         }
@@ -64,13 +77,13 @@ struct TeamDataHelper: DataHelper {
     static func findAll() throws -> [T]? {
         return teamData
     }
+
     static func find(_ id: Int64) throws -> T? {
         for team in teamData where team.teamId == id {
             return team
         }
         return nil
     }
-    
 }
 
 
@@ -114,7 +127,6 @@ struct Team {
     var city: String?
     var nickName:String?
     var abbreviation:String?
-
 }
 
 struct Player {
@@ -136,10 +148,9 @@ struct Player {
         self.firstName = firstName
         self.lastName = lastName
         self.number = number
-        self.teamId =  teamId
+        self.teamId = teamId
         self.position = position
-        if let
-            id = self.teamId {
+        if let id = self.teamId {
             if let t = try? TeamBridge.retrieve(id) {
                 team = t
             }
@@ -148,12 +159,12 @@ struct Player {
 }
 
 struct TeamBridge {
-    static func save(_ team:inout Team) throws {
+    static func save(_ team: inout Team) throws {
         let teamData = toTeamData(team)
         let id = try TeamDataHelper.insert(teamData)
         team.teamId = id
     }
-    static func delete(_ team:Team) throws {
+    static func delete(_ team: Team) throws {
         let teamData = toTeamData(team)
         try TeamDataHelper.delete(teamData)
     }
@@ -172,12 +183,12 @@ struct TeamBridge {
 }
 
 struct PlayerBridge {
-    static func save(_ player:inout Player) throws {
+    static func save(_ player: inout Player) throws {
         let playerData = toPlayerData(player)
         let id = try PlayerDataHelper.insert(playerData)
         player.playerId = id
     }
-    static func delete(_ player:Player) throws {
+    static func delete(_ player: Player) throws {
         let playerData = toPlayerData(player)
         try PlayerDataHelper.delete(playerData)
     }
@@ -201,21 +212,35 @@ struct PlayerBridge {
     }
 }
 
-var bos = Team( teamId: 0, city: "Boston",
-                nickName: "Red Sox", abbreviation: "BOS")
+var bos = Team(
+    teamId: 0,
+    city: "Boston",
+    nickName: "Red Sox",
+    abbreviation: "BOS"
+)
 
 try? TeamBridge.save(&bos)
-var ortiz = Player(
-    playerId: 0,firstName: "David", lastName: "Ortiz", number: 34,
-    teamId: bos.teamId, position: Positions.designatedHitter)
 
-try? PlayerBridge.save(&ortiz)
+var ortiz = Player(
+    playerId: 0,
+    firstName: "David",
+    lastName: nil,
+    number: 34,
+    teamId: bos.teamId,
+    position: .designatedHitter
+)
+
+do {
+    try PlayerBridge.save(&ortiz)
+} catch let error as DataAccessError {
+    print(" ortiz bridge error : \(error)")
+}
 
 if let team = try? TeamBridge.retrieve(0) {
-    print("--- \(team?.city)")
+    print("--- \(team.city)")
 }
 
 if let player = try? PlayerBridge.retrieve(0) {
-    print("---- \(player?.firstName) \(player?.lastName) plays for (player?.team?.city)")
+    print("---- \(player.firstName) \(player.lastName) plays for \(player.team?.city)")
 }
 

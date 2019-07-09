@@ -9,12 +9,12 @@ protocol Vehicle {
 }
 
 extension Vehicle {
-    
     mutating func takeHit(amount: Int) {
         hitPoints -= amount
     }
     func hitPointsRemaining() -> Int {
-        return hitPoints }
+        return hitPoints
+    }
     func isAlive() -> Bool {
         return hitPoints > 0 ? true : false
     }
@@ -158,11 +158,19 @@ for (index, vehicle) in vehicles.enumerated() where vehicle is LandVehicle {
 }
 
 
+func takeHit(vehicleValue vehicle: Vehicle) {
+    var vh = vehicle
+    vh.takeHit(amount: 10)
+}
 
 func takeHit<T: Vehicle>(vehicle: inout T) {
     vehicle.takeHit(amount: 10)
 }
 
 var tank = Tank()
+
+takeHit(vehicleValue: tank)
+print(tank.hitPointsRemaining())
+
 takeHit(vehicle: &tank)
 print(tank.hitPointsRemaining())

@@ -20,7 +20,7 @@ extension Collection {
         return result
     }
     
-    func shuffle() -> [Iterator.Element] {
+    func shuffle2() -> [Iterator.Element] {
         return sorted(){ left, right in
             return arc4random() < arc4random()
         }
@@ -39,8 +39,7 @@ extension Collection where Iterator.Element: Comparable {
 var origArray = [1,2,3,4,5,6,7,8,9,10]
 
 var newArray = origArray.evenElements()
-var ranArray = origArray.shuffle()
-
+var ranArray = origArray.shuffle2()
 
 var origDict = [1:"One",2:"Two",3:"Three",4:"Four"]
 var returnElements = origDict.evenElements()

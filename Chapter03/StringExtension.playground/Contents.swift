@@ -6,7 +6,7 @@ var str = "Hello, playground"
 
 extension String {
     func getFirstChar() -> Character? {
-        guard characters.count > 0 else {
+        guard self.count > 0 else {
             return nil
         }
         return self[startIndex]

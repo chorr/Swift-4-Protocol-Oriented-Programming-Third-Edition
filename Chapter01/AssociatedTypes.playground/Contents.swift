@@ -13,6 +13,7 @@ protocol Queue {
 
 struct IntQueue: Queue {
     var items = [Int]()
+
     mutating func addItem(item: Int) {
         items.append(item)
     }
@@ -28,3 +29,6 @@ struct IntQueue: Queue {
         return items.count
     }
 }
+
+var queue = IntQueue(items: [2, 4])
+
